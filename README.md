@@ -93,6 +93,13 @@ For stdio-only clients use the bridge: `APPLE_HOME_MCP_API_KEY=<key> apple-home-
 
 The API key and the Home Assistant token live in the Keychain, not in this file.
 
+### Home Assistant
+
+Menu bar › *Home Assistant…*: base URL + a long-lived access token (HA profile › Security). The Matter commission
+and floor/area registry calls are WebSocket-only APIs, so generic HA connectors that only expose states/services
+are not enough. On first use macOS asks to allow **Local Network** access for the app; allow it, or HA on your
+LAN is unreachable (`NSURLErrorDomain -1009`).
+
 ## Docs
 
 * [docs/PAIRING.md](docs/PAIRING.md) – adding accessories and sharing Matter accessories with Home Assistant: what the public APIs allow
