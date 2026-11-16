@@ -1,0 +1,4 @@
+// Copy to Config/Local.xcconfig (git-ignored) and fill in your own values.
+// HomeKit is a restricted entitlement: the bundle id must belong to YOUR Apple Developer team.
+DEVELOPMENT_TEAM = ABCDE12345
+APP_BUNDLE_ID = com.yourname.applehomemcp

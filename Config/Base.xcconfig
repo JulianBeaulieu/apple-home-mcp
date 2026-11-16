@@ -1,0 +1,8 @@
+// Shared build settings. Per-developer values (team, bundle id) go in Config/Local.xcconfig,
+// which is git-ignored. Copy Config/Local.xcconfig.example to get started.
+APP_BUNDLE_ID = com.example.applehomemcp
+DEVELOPMENT_TEAM =
+MARKETING_VERSION = 0.1.0
+CURRENT_PROJECT_VERSION = 1
+
+#include? "Local.xcconfig"
