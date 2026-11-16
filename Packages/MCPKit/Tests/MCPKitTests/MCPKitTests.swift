@@ -248,6 +248,12 @@ final class AreaSyncTests: XCTestCase {
                        [.setAreaFloor(areaID: "kitchen", areaName: "Kitchen", floor: "Upstairs")])
     }
 
+    func testCurlyApostropheMatchesStraight() {
+        let plan = AreaSync.plan(floors: [], rooms: [.init(name: "Kid\u{2019}s Room", floor: nil)], haFloors: [],
+                                 haAreas: [.init(id: "kids_room", name: "Kid's Room", floorID: nil)])
+        XCTAssertEqual(plan, [])
+    }
+
     func testWebsocketURL() {
         XCTAssertEqual(HomeAssistantClient.websocketURL(for: URL(string: "https://ha.example:8123/")!)?.absoluteString, "wss://ha.example:8123/api/websocket")
         XCTAssertEqual(HomeAssistantClient.websocketURL(for: URL(string: "http://ha.example")!)?.absoluteString, "ws://ha.example/api/websocket")

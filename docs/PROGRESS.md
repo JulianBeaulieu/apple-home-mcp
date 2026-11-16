@@ -19,7 +19,10 @@ Verified on a real home (macOS 15.7.4, app in background):
   (restored), denylist + lock refusals, control-disabled refusal, API key via menu → bearer → 200, stdio bridge.
 * Matter: attribute reads, fabric listing, **opening and closing a multi-admin commissioning window** via HomeKit XPC.
 
+Also verified:
+* Home Assistant: `ha_status` (WebSocket auth, Matter integration loaded) and `ha_sync_areas` dry run against a live
+  instance → empty plan (already in sync, after treating curly and straight apostrophes as equal).
+* v0.1.0 released: notarized universal `apple-home-mcp-bridge` (notary status Accepted) + source zip + SHA256SUMS.
+
 Open:
 * End-to-end `matter_share_to_home_assistant` on a device that is not yet in Home Assistant.
-* `ha_sync_areas` against a live Home Assistant (dry run first).
-* Notarized bridge CLI release (needs `notarytool store-credentials`).

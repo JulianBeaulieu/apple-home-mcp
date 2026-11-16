@@ -88,7 +88,10 @@ public struct SafetyPolicy: Sendable {
 
     public static func normalize(_ s: String) -> String {
         var t = s.lowercased()
-        for (a, b) in [("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss")] { t = t.replacingOccurrences(of: a, with: b) }
+        for (a, b) in [("ä", "ae"), ("ö", "oe"), ("ü", "ue"), ("ß", "ss"),
+                       ("\u{2019}", "'"), ("\u{2018}", "'"), ("\u{201C}", "\""), ("\u{201D}", "\"")] {
+            t = t.replacingOccurrences(of: a, with: b)
+        }
         t = t.folding(options: [.diacriticInsensitive, .caseInsensitive, .widthInsensitive], locale: Locale(identifier: "en_US_POSIX"))
         let collapsed = t.split(whereSeparator: { $0.isWhitespace }).joined(separator: " ")
         return collapsed
