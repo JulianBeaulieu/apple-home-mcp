@@ -68,6 +68,7 @@ final class AppHost: NSObject, MenuBarHost {
     }
 
     func start() {
+        importHomeAssistantFromEnvironment()
         cachedKey = Keychain.read(Keychain.apiKeyAccount)
         if cachedKey == nil {
             let k = APIKey.generate()
@@ -98,6 +99,17 @@ final class AppHost: NSObject, MenuBarHost {
         }
         store.onChange = { [weak self] in self?.menuRefresh() }
         restartServer()
+    }
+
+    /// One-time import of an existing token: `open --env AHM_HA_URL=... --env AHM_HA_TOKEN="$HA_TOKEN" "Apple Home MCP.app"`.
+    /// The token goes straight into the Keychain and is never logged or written to the config file.
+    private func importHomeAssistantFromEnvironment() {
+        let env = ProcessInfo.processInfo.environment
+        if let url = env["AHM_HA_URL"], !url.isEmpty { try? config.update { $0.homeAssistant.url = url } }
+        if let token = env["AHM_HA_TOKEN"], !token.isEmpty {
+            if Keychain.write(Keychain.homeAssistantTokenAccount, token) { record("Home Assistant token imported") }
+            else { record("Home Assistant token import failed (\(Keychain.lastStatus))") }
+        }
     }
 
     nonisolated(unsafe) private var _keySnapshot: String?

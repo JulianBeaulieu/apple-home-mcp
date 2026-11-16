@@ -97,7 +97,9 @@ The API key and the Home Assistant token live in the Keychain, not in this file.
 
 Menu bar › *Home Assistant…*: base URL + a long-lived access token (HA profile › Security). The Matter commission
 and floor/area registry calls are WebSocket-only APIs, so generic HA connectors that only expose states/services
-are not enough. On first use macOS asks to allow **Local Network** access for the app; allow it, or HA on your
+are not enough. To reuse a token you already have in your shell, launch once with
+`open --env AHM_HA_URL=http://homeassistant.local:8123 --env AHM_HA_TOKEN="$HA_TOKEN" "/Applications/Apple Home MCP.app"`
+(the app stores it in the Keychain; quit the running instance first). On first use macOS asks to allow **Local Network** access for the app; allow it, or HA on your
 LAN is unreachable (`NSURLErrorDomain -1009`).
 
 ## Docs
